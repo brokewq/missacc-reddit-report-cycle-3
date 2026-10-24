@@ -247,6 +247,8 @@
   .ph-meta .sub{color:var(--deep); font-weight:700}
   .ph-meta .sep{color:var(--faint)}
   .ptitle{margin:9px 0 0; font-size:19px; font-weight:700; color:var(--ink); font-family:'Space Grotesk',sans-serif; letter-spacing:-.01em}
+  .ptitle a{color:inherit; text-decoration:none}
+  .ptitle a:hover{color:var(--deep)}
   .ribbon{display:inline-flex; align-items:center; gap:8px; margin-top:14px; width:max-content; max-width:100%;
     font-size:12.5px; font-weight:600; color:#1f5c3b; background:#e9f4ee; border:1px solid #cde5d6; border-radius:999px; padding:6px 13px 6px 7px}
   .ribbon b{font:700 12px 'Space Grotesk',sans-serif; color:#fff; background:var(--green); border-radius:999px; padding:3px 9px}
@@ -634,56 +636,56 @@
     <div class="table-wrap">
       <table>
         <thead>
-          <tr><th>#</th><th>Date</th><th>Subreddit</th><th>Post</th><th>Format</th></tr>
+          <tr><th>#</th><th>Date</th><th>Subreddit</th><th>Post</th><th style="text-align:right">Link</th></tr>
         </thead>
         <tbody>
           <tr>
             <td class="num">Post 1</td><td class="date">7 Oct</td>
             <td class="sub-sm">r/TwoXChromosomes</td>
             <td class="topic">Hoco dress hunt is not going well</td>
-            <td><span class="fmt ask">Discovery ask</span></td>
+            <td class="repcell"><a href="https://www.reddit.com/r/TwoXChromosomes/comments/1wzurl5/hoco_dress_hunt_is_not_going_well" target="_blank" rel="noopener">View ↗</a></td>
           </tr>
           <tr>
             <td class="num">Post 2</td><td class="date">12 Oct</td>
             <td class="sub-sm">r/OUTFITS</td>
             <td class="topic">My hoco dress came in and I love it</td>
-            <td><span class="fmt proof">Social proof</span></td>
+            <td class="repcell"><a href="https://www.reddit.com/r/OUTFITS/comments/1x4820v/my_hoco_dress_came_in_and_i_love_it" target="_blank" rel="noopener">View ↗</a></td>
           </tr>
           <tr>
             <td class="num">Post 3</td><td class="date">14 Oct</td>
             <td class="sub-sm">r/fashionhelp</td>
             <td class="topic">Tried this on for my cousin's wedding and now I can't decide lol</td>
-            <td><span class="fmt proof">Social proof</span></td>
+            <td class="repcell"><a href="https://www.reddit.com/r/fashionhelp/comments/1x5zmid/tried_this_on_for_my_cousins_wedding_and_now_i" target="_blank" rel="noopener">View ↗</a></td>
           </tr>
           <tr>
             <td class="num">Post 4</td><td class="date">15 Oct</td>
             <td class="sub-sm">r/Parents</td>
             <td class="topic">Junior bridesmaid dress came today and she hasn't&hellip;</td>
-            <td><span class="fmt proof">Social proof</span></td>
+            <td class="repcell"><a href="https://www.reddit.com/r/Parents/comments/1x6ujo3/junior_bridesmaid_dress_came_today_and_she_hasnt" target="_blank" rel="noopener">View ↗</a></td>
           </tr>
           <tr>
             <td class="num">Post 5</td><td class="date">19 Oct</td>
             <td class="sub-sm">r/fashionadvice</td>
             <td class="topic">Anyone tried Missacc custom sizing?</td>
-            <td><span class="fmt brand">Brand ask</span></td>
+            <td class="repcell"><a href="https://www.reddit.com/r/fashionadvice/comments/1xa416r/anyone_tried_missacc_custom_sizing" target="_blank" rel="noopener">View ↗</a></td>
           </tr>
           <tr>
             <td class="num">Post 6</td><td class="date">19 Oct</td>
             <td class="sub-sm">r/OUTFITS</td>
             <td class="topic">Dressing up after a long time, this is for my retirement party</td>
-            <td><span class="fmt proof">Social proof</span></td>
+            <td class="repcell"><a href="https://www.reddit.com/r/OUTFITS/comments/1xa4lke/dressing_up_after_a_long_time_this_is_for_my" target="_blank" rel="noopener">View ↗</a></td>
           </tr>
           <tr>
             <td class="num">Post 7</td><td class="date">19 Oct</td>
             <td class="sub-sm">r/femalefashion</td>
             <td class="topic">Red satin for a garden wedding, how'd I do?</td>
-            <td><span class="fmt style">Style feedback</span></td>
+            <td class="repcell"><a href="https://www.reddit.com/r/femalefashion/comments/1xa8gom/red_satin_for_a_garden_wedding_howd_i_do" target="_blank" rel="noopener">View ↗</a></td>
           </tr>
           <tr>
             <td class="num">Post 8</td><td class="date">20 Oct</td>
             <td class="sub-sm">r/TwoXChromosomes</td>
             <td class="topic">Where can I find some nicer dresses</td>
-            <td><span class="fmt ask">Discovery ask</span></td>
+            <td class="repcell"><a href="https://www.reddit.com/r/TwoXChromosomes/comments/1xaxncs/where_can_i_find_some_nicer_dresses" target="_blank" rel="noopener">View ↗</a></td>
           </tr>
         </tbody>
       </table>
@@ -703,7 +705,7 @@
         <a class="ins" href="insights/post8.webp" target="_blank" rel="noopener"><img src="insights/post8.webp" alt="Reddit post insights for Where can I find some nicer dresses" loading="lazy"><span class="ins-cap">Reddit post insights ↗</span></a>
         <div class="ph-b">
           <div class="ph-meta"><span class="sub">r/TwoXChromosomes</span><span class="sep">·</span><span>20 Oct</span><span class="sep">·</span><span class="fmt ask">Discovery ask</span></div>
-          <h3 class="ptitle">Where can I find some nicer dresses</h3>
+          <h3 class="ptitle"><a href="https://www.reddit.com/r/TwoXChromosomes/comments/1xaxncs/where_can_i_find_some_nicer_dresses" target="_blank" rel="noopener">Where can I find some nicer dresses ↗</a></h3>
         <span class="ribbon"><b>#10</b>post of all time on its account</span>
           <div class="pstats">
             <div class="pstat"><b>30K</b><span>Views</span></div>
@@ -717,7 +719,7 @@
         <a class="ins" href="insights/post2.png" target="_blank" rel="noopener"><img src="insights/post2.png" alt="Reddit post insights for My hoco dress came in and I love it" loading="lazy"><span class="ins-cap">Reddit post insights ↗</span></a>
         <div class="ph-b">
           <div class="ph-meta"><span class="sub">r/OUTFITS</span><span class="sep">·</span><span>12 Oct</span><span class="sep">·</span><span class="fmt proof">Social proof</span></div>
-          <h3 class="ptitle">My hoco dress came in and I love it</h3>
+          <h3 class="ptitle"><a href="https://www.reddit.com/r/OUTFITS/comments/1x4820v/my_hoco_dress_came_in_and_i_love_it" target="_blank" rel="noopener">My hoco dress came in and I love it ↗</a></h3>
         <span class="ribbon"><b>#6</b>post on r/OUTFITS that day</span>
         <span class="ribbon"><b>Top 50</b>all-time post on its account</span>
           <div class="pstats">
@@ -731,7 +733,7 @@
         <a class="ins wide" href="insights/post3.png" target="_blank" rel="noopener"><img src="insights/post3.png" alt="Reddit post insights for Tried this on for my cousin's wedding and now I can't decide lol" loading="lazy"><span class="ins-cap">Reddit post insights ↗</span></a>
         <div class="ph-b">
           <div class="ph-meta"><span class="sub">r/fashionhelp</span><span class="sep">·</span><span>14 Oct</span><span class="sep">·</span><span class="fmt proof">Social proof</span></div>
-          <h3 class="ptitle">Tried this on for my cousin's wedding and now I can't decide lol</h3>
+          <h3 class="ptitle"><a href="https://www.reddit.com/r/fashionhelp/comments/1x5zmid/tried_this_on_for_my_cousins_wedding_and_now_i" target="_blank" rel="noopener">Tried this on for my cousin's wedding and now I can't decide lol ↗</a></h3>
           <div class="pstats">
             <div class="pstat"><b>13K</b><span>Views</span></div>
           <div class="pstat"><b>70.4%</b><span>US audience</span></div>
@@ -744,7 +746,7 @@
         <a class="ins wide" href="insights/post6.png" target="_blank" rel="noopener"><img src="insights/post6.png" alt="Reddit post insights for Dressing up after a long time, this is for my retirement party" loading="lazy"><span class="ins-cap">Reddit post insights ↗</span></a>
         <div class="ph-b">
           <div class="ph-meta"><span class="sub">r/OUTFITS</span><span class="sep">·</span><span>19 Oct</span><span class="sep">·</span><span class="fmt proof">Social proof</span></div>
-          <h3 class="ptitle">Dressing up after a long time, this is for my retirement party</h3>
+          <h3 class="ptitle"><a href="https://www.reddit.com/r/OUTFITS/comments/1xa4lke/dressing_up_after_a_long_time_this_is_for_my" target="_blank" rel="noopener">Dressing up after a long time, this is for my retirement party ↗</a></h3>
           <div class="pstats">
             <div class="pstat"><b>9K</b><span>Views</span></div>
           <div class="pstat"><b>59.1%</b><span>US audience</span></div>
@@ -757,7 +759,7 @@
         <a class="ins" href="insights/post7.webp" target="_blank" rel="noopener"><img src="insights/post7.webp" alt="Reddit post insights for Red satin for a garden wedding, how'd I do?" loading="lazy"><span class="ins-cap">Reddit post insights ↗</span></a>
         <div class="ph-b">
           <div class="ph-meta"><span class="sub">r/femalefashion</span><span class="sep">·</span><span>19 Oct</span><span class="sep">·</span><span class="fmt style">Style feedback</span></div>
-          <h3 class="ptitle">Red satin for a garden wedding, how'd I do?</h3>
+          <h3 class="ptitle"><a href="https://www.reddit.com/r/femalefashion/comments/1xa8gom/red_satin_for_a_garden_wedding_howd_i_do" target="_blank" rel="noopener">Red satin for a garden wedding, how'd I do? ↗</a></h3>
         <span class="ribbon"><b>#1</b>post on r/femalefashion that day</span>
         <span class="ribbon"><b>#22</b>post of all time on its account</span>
           <div class="pstats">
@@ -771,7 +773,7 @@
         <a class="ins wide" href="insights/post1.png" target="_blank" rel="noopener"><img src="insights/post1.png" alt="Reddit post insights for Hoco dress hunt is not going well" loading="lazy"><span class="ins-cap">Reddit post insights ↗</span></a>
         <div class="ph-b">
           <div class="ph-meta"><span class="sub">r/TwoXChromosomes</span><span class="sep">·</span><span>7 Oct</span><span class="sep">·</span><span class="fmt ask">Discovery ask</span></div>
-          <h3 class="ptitle">Hoco dress hunt is not going well</h3>
+          <h3 class="ptitle"><a href="https://www.reddit.com/r/TwoXChromosomes/comments/1wzurl5/hoco_dress_hunt_is_not_going_well" target="_blank" rel="noopener">Hoco dress hunt is not going well ↗</a></h3>
           <div class="pstats">
             <div class="pstat"><b>5K</b><span>Views</span></div>
           <div class="pstat"><b>64.5%</b><span>US audience</span></div>
@@ -784,7 +786,7 @@
         <a class="ins" href="insights/post4.webp" target="_blank" rel="noopener"><img src="insights/post4.webp" alt="Reddit post insights for Junior bridesmaid dress came today and she hasn't&hellip;" loading="lazy"><span class="ins-cap">Reddit post insights ↗</span></a>
         <div class="ph-b">
           <div class="ph-meta"><span class="sub">r/Parents</span><span class="sep">·</span><span>15 Oct</span><span class="sep">·</span><span class="fmt proof">Social proof</span></div>
-          <h3 class="ptitle">Junior bridesmaid dress came today and she hasn't&hellip;</h3>
+          <h3 class="ptitle"><a href="https://www.reddit.com/r/Parents/comments/1x6ujo3/junior_bridesmaid_dress_came_today_and_she_hasnt" target="_blank" rel="noopener">Junior bridesmaid dress came today and she hasn't&hellip; ↗</a></h3>
         <span class="ribbon"><b>#1</b>post on r/Parents that day</span>
           <div class="pstats">
             <div class="pstat"><b>2.5K</b><span>Views</span></div>
@@ -798,7 +800,7 @@
         <a class="ins" href="insights/post5.webp" target="_blank" rel="noopener"><img src="insights/post5.webp" alt="Reddit post insights for Anyone tried Missacc custom sizing?" loading="lazy"><span class="ins-cap">Reddit post insights ↗</span></a>
         <div class="ph-b">
           <div class="ph-meta"><span class="sub">r/fashionadvice</span><span class="sep">·</span><span>19 Oct</span><span class="sep">·</span><span class="fmt brand">Brand ask</span></div>
-          <h3 class="ptitle">Anyone tried Missacc custom sizing?</h3>
+          <h3 class="ptitle"><a href="https://www.reddit.com/r/fashionadvice/comments/1xa416r/anyone_tried_missacc_custom_sizing" target="_blank" rel="noopener">Anyone tried Missacc custom sizing? ↗</a></h3>
         <span class="ribbon o"><b>First</b>brand-titled post of the engagement</span>
           <div class="pstats">
             <div class="pstat"><b>681</b><span>Views</span></div>
