@@ -226,6 +226,39 @@
   .fmt.new{background:#eef0fb; color:#4653a8; border:1px solid #d8ddf4}
   .fmt.brand{background:var(--orange); color:#fff; border:1px solid #e35b0b}
 
+
+  /* ===== post insights ===== */
+  .pcard{background:var(--card); border:1px solid var(--line); border-radius:18px; box-shadow:var(--shadow); overflow:hidden; margin-top:14px}
+  .ph{display:grid; grid-template-columns:225px 1fr; gap:28px; padding:26px}
+  .ins{position:relative; display:block; aspect-ratio:9/13; border-radius:16px; overflow:hidden; background:#0e1113;
+    border:5px solid #1c1611; box-shadow:0 16px 36px rgba(28,22,17,.18); transition:transform .2s ease; text-decoration:none; align-self:start}
+  .ins:hover{transform:translateY(-3px) rotate(-.4deg)}
+  .ins img{width:100%; height:100%; object-fit:cover; object-position:center top; display:block}
+  .ins-cap{position:absolute; left:8px; right:8px; bottom:8px; text-align:center; font-size:10.5px; font-weight:600; color:#fff;
+    background:rgba(14,17,19,.82); border-radius:999px; padding:6px 8px; backdrop-filter:blur(4px)}
+  .ins.wide{aspect-ratio:auto; border-width:4px; border-radius:12px}
+  .ins.wide img{height:auto; object-fit:initial}
+  .ins.wide .ins-cap{position:static; display:block; border-radius:0; margin:0; padding:7px}
+  .ph-b{min-width:0; display:flex; flex-direction:column}
+  .ph-meta{display:flex; align-items:center; gap:9px; flex-wrap:wrap; font-size:13px; color:var(--muted)}
+  .ph-meta .sub{color:var(--deep); font-weight:700}
+  .ph-meta .sep{color:var(--faint)}
+  .ptitle{margin:9px 0 0; font-size:19px; font-weight:700; color:var(--ink); font-family:'Space Grotesk',sans-serif; letter-spacing:-.01em}
+  .ribbon{display:inline-flex; align-items:center; gap:8px; margin-top:14px; width:max-content; max-width:100%;
+    font-size:12.5px; font-weight:600; color:#1f5c3b; background:#e9f4ee; border:1px solid #cde5d6; border-radius:999px; padding:6px 13px 6px 7px}
+  .ribbon b{font:700 12px 'Space Grotesk',sans-serif; color:#fff; background:var(--green); border-radius:999px; padding:3px 9px}
+  .ribbon.o{color:#9a3f06; background:#fdeee1; border-color:#f6d9c2}
+  .ribbon.o b{background:var(--orange)}
+  .pstats{display:flex; flex-wrap:wrap; gap:10px; margin-top:auto; padding-top:18px}
+  .pstat{border:1px solid var(--line); border-radius:12px; padding:11px 16px; min-width:112px; background:var(--card)}
+  .pstat:first-child{background:var(--ink); border-color:var(--ink)}
+  .pstat:first-child b{color:#ffb27d}
+  .pstat:first-child span{color:rgba(255,255,255,.7)}
+  .pstat b{display:block; font:700 19px 'Space Grotesk',sans-serif; color:var(--ink); letter-spacing:-.01em}
+  .pstat span{display:block; margin-top:2px; font-size:10px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--muted)}
+  @media (max-width:860px){.ph{grid-template-columns:170px 1fr; gap:20px}}
+  @media (max-width:620px){.ph{grid-template-columns:1fr; padding:20px 18px}.ins{width:64%; max-width:230px; justify-self:center}.ins.wide{width:100%; max-width:none}}
+
   /* ===== landscape tiles ===== */
   .landgrid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:24px}
   .landtile{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:19px 19px 15px;
@@ -324,6 +357,7 @@
     <a href="#counterweight">The counterweight</a>
     <a href="#sentiment">Sentiment</a>
     <a href="#posts">Placements</a>
+    <a href="#insights">Insights</a>
     <a href="#comments">Comments</a>
     <a href="#communities">Communities</a>
     <a href="#closing">Closing note</a>
@@ -583,7 +617,7 @@
       <div class="stat"><div class="n seq">1 <span class="ar">→</span> 35 <span class="ar">→</span> 57 <span class="ar">→</span> 89 <span class="ar">→</span> <em>115</em></div><div class="l">Positive comments by cycle</div><div class="d">Risen every sweep since the single Month 1 endorsement</div></div>
       <div class="stat"><div class="n">26<span style="font-size:20px;color:var(--muted)"> of 37</span></div><div class="l">In-cycle positives</div><div class="d">70% of new comment-layer mentions this cycle read positive</div></div>
       <div class="stat"><div class="n">42</div><div class="l">Communities</div><div class="d">Subreddits holding a positive branded comment, up from 32</div></div>
-      <div class="stat"><div class="n">19</div><div class="l">Replies on our posts</div><div class="d">Organic responses across the eight posts this cycle</div></div>
+      <div class="stat"><div class="n">94K</div><div class="l">Views on our posts</div><div class="d">Across the eight posts this cycle, with 19 organic replies</div></div>
     </div>
     <div class="note"><b>Why this matters for the long arc:</b> each positive comment is a discoverable, indexed counter-signal to the legacy negative posts. The pattern holds: when a recommendation is grounded in the thread's specific brief and followed up in conversation, it reads as advisory rather than promotional, and the community treats it accordingly. The first four cycles said this compounding would eventually make higher-intent brand formats viable. This cycle, the first of those formats went live: a post carrying the brand's own name, and it held.</div>
   </section>
@@ -592,7 +626,7 @@
   <section class="block" id="posts">
     <div class="block-head">
       <h2>Posts Published</h2>
-      <p>Eight posts this cycle, and one of them is a first for the engagement: a post that carries the brand name in its title. The mix has shifted toward social proof, with dress reveals and try-ons carrying most of the surface and discovery asks framing the rest. The eight posts drew 19 organic replies between them.</p>
+      <p>Eight posts this cycle, and one of them is a first for the engagement: a post that carries the brand name in its title. The mix has shifted toward social proof, with dress reveals and try-ons carrying most of the surface and discovery asks framing the rest. The eight posts drew 19 organic replies and more than 94,000 views between them; the per-post insights are below.</p>
     </div>
     <div class="table-wrap">
       <table>
@@ -615,7 +649,7 @@
           <tr>
             <td class="num">Post 3</td><td class="date">14 Oct</td>
             <td class="sub-sm">r/fashionhelp</td>
-            <td class="topic">Tried this on for my cousin's wedding and now I&hellip;</td>
+            <td class="topic">Tried this on for my cousin's wedding and now I can't decide lol</td>
             <td><span class="fmt proof">Social proof</span></td>
           </tr>
           <tr>
@@ -633,7 +667,7 @@
           <tr>
             <td class="num">Post 6</td><td class="date">19 Oct</td>
             <td class="sub-sm">r/OUTFITS</td>
-            <td class="topic">Dressing up after a long time, this is for my&hellip;</td>
+            <td class="topic">Dressing up after a long time, this is for my retirement party</td>
             <td><span class="fmt proof">Social proof</span></td>
           </tr>
           <tr>
@@ -652,6 +686,133 @@
       </table>
     </div>
     <div class="note"><b>The milestone:</b> "Anyone tried Missacc custom sizing?" is the first post of the engagement to name the brand in its title, asking directly about the product attribute the legacy record attacks hardest. It drew replies and ran clean, because it landed in a room four cycles of groundwork had prepared. This is the higher-intent format every previous report pointed toward, live and holding.</div>
+  </section>
+
+
+  <!-- ============ POST INSIGHTS ============ -->
+  <section class="block" id="insights">
+    <div class="block-head">
+      <h2>Post Insights</h2>
+      <p>The reach behind each post, straight from Reddit's own analytics. Every card below carries the native insights capture for that post: views, the first-48-hours curve, and where the audience came from. Together the eight posts collected more than 94,000 views, with four of them crossing 5,000 and two crossing 25,000.</p>
+    </div>
+    <article class="pcard">
+      <div class="ph">
+        <a class="ins" href="insights/post8.webp" target="_blank" rel="noopener"><img src="insights/post8.webp" alt="Reddit post insights for Where can I find some nicer dresses" loading="lazy"><span class="ins-cap">Reddit post insights ↗</span></a>
+        <div class="ph-b">
+          <div class="ph-meta"><span class="sub">r/TwoXChromosomes</span><span class="sep">·</span><span>20 Oct</span><span class="sep">·</span><span class="fmt ask">Discovery ask</span></div>
+          <h3 class="ptitle">Where can I find some nicer dresses</h3>
+        <span class="ribbon"><b>#10</b>post of all time on its account</span>
+          <div class="pstats">
+            <div class="pstat"><b>30K</b><span>Views</span></div>
+            <div class="pstat"><b>5</b><span>Replies</span></div>
+          <div class="pstat"><b>68.4%</b><span>US audience</span></div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="pcard">
+      <div class="ph">
+        <a class="ins" href="insights/post2.png" target="_blank" rel="noopener"><img src="insights/post2.png" alt="Reddit post insights for My hoco dress came in and I love it" loading="lazy"><span class="ins-cap">Reddit post insights ↗</span></a>
+        <div class="ph-b">
+          <div class="ph-meta"><span class="sub">r/OUTFITS</span><span class="sep">·</span><span>12 Oct</span><span class="sep">·</span><span class="fmt proof">Social proof</span></div>
+          <h3 class="ptitle">My hoco dress came in and I love it</h3>
+        <span class="ribbon"><b>#6</b>post on r/OUTFITS that day</span>
+        <span class="ribbon"><b>Top 50</b>all-time post on its account</span>
+          <div class="pstats">
+            <div class="pstat"><b>28K</b><span>Views</span></div>
+            <div class="pstat"><b>3</b><span>Replies</span></div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="pcard">
+      <div class="ph">
+        <a class="ins wide" href="insights/post3.png" target="_blank" rel="noopener"><img src="insights/post3.png" alt="Reddit post insights for Tried this on for my cousin's wedding and now I can't decide lol" loading="lazy"><span class="ins-cap">Reddit post insights ↗</span></a>
+        <div class="ph-b">
+          <div class="ph-meta"><span class="sub">r/fashionhelp</span><span class="sep">·</span><span>14 Oct</span><span class="sep">·</span><span class="fmt proof">Social proof</span></div>
+          <h3 class="ptitle">Tried this on for my cousin's wedding and now I can't decide lol</h3>
+          <div class="pstats">
+            <div class="pstat"><b>13K</b><span>Views</span></div>
+            <div class="pstat"><b>3</b><span>Replies</span></div>
+          <div class="pstat"><b>70.4%</b><span>US audience</span></div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="pcard">
+      <div class="ph">
+        <a class="ins wide" href="insights/post6.png" target="_blank" rel="noopener"><img src="insights/post6.png" alt="Reddit post insights for Dressing up after a long time, this is for my retirement party" loading="lazy"><span class="ins-cap">Reddit post insights ↗</span></a>
+        <div class="ph-b">
+          <div class="ph-meta"><span class="sub">r/OUTFITS</span><span class="sep">·</span><span>19 Oct</span><span class="sep">·</span><span class="fmt proof">Social proof</span></div>
+          <h3 class="ptitle">Dressing up after a long time, this is for my retirement party</h3>
+          <div class="pstats">
+            <div class="pstat"><b>9K</b><span>Views</span></div>
+            <div class="pstat"><b>3</b><span>Replies</span></div>
+          <div class="pstat"><b>59.1%</b><span>US audience</span></div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="pcard">
+      <div class="ph">
+        <a class="ins" href="insights/post7.webp" target="_blank" rel="noopener"><img src="insights/post7.webp" alt="Reddit post insights for Red satin for a garden wedding, how'd I do?" loading="lazy"><span class="ins-cap">Reddit post insights ↗</span></a>
+        <div class="ph-b">
+          <div class="ph-meta"><span class="sub">r/femalefashion</span><span class="sep">·</span><span>19 Oct</span><span class="sep">·</span><span class="fmt style">Style feedback</span></div>
+          <h3 class="ptitle">Red satin for a garden wedding, how'd I do?</h3>
+        <span class="ribbon"><b>#1</b>post on r/femalefashion that day</span>
+        <span class="ribbon"><b>#22</b>post of all time on its account</span>
+          <div class="pstats">
+            <div class="pstat"><b>5.9K</b><span>Views</span></div>
+            <div class="pstat"><b>4</b><span>Replies</span></div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="pcard">
+      <div class="ph">
+        <a class="ins wide" href="insights/post1.png" target="_blank" rel="noopener"><img src="insights/post1.png" alt="Reddit post insights for Hoco dress hunt is not going well" loading="lazy"><span class="ins-cap">Reddit post insights ↗</span></a>
+        <div class="ph-b">
+          <div class="ph-meta"><span class="sub">r/TwoXChromosomes</span><span class="sep">·</span><span>7 Oct</span><span class="sep">·</span><span class="fmt ask">Discovery ask</span></div>
+          <h3 class="ptitle">Hoco dress hunt is not going well</h3>
+          <div class="pstats">
+            <div class="pstat"><b>5K</b><span>Views</span></div>
+            <div class="pstat"><b>1</b><span>Replies</span></div>
+          <div class="pstat"><b>64.5%</b><span>US audience</span></div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="pcard">
+      <div class="ph">
+        <a class="ins" href="insights/post4.webp" target="_blank" rel="noopener"><img src="insights/post4.webp" alt="Reddit post insights for Junior bridesmaid dress came today and she hasn't&hellip;" loading="lazy"><span class="ins-cap">Reddit post insights ↗</span></a>
+        <div class="ph-b">
+          <div class="ph-meta"><span class="sub">r/Parents</span><span class="sep">·</span><span>15 Oct</span><span class="sep">·</span><span class="fmt proof">Social proof</span></div>
+          <h3 class="ptitle">Junior bridesmaid dress came today and she hasn't&hellip;</h3>
+        <span class="ribbon"><b>#1</b>post on r/Parents that day</span>
+          <div class="pstats">
+            <div class="pstat"><b>2.5K</b><span>Views</span></div>
+            <div class="pstat"><b>0</b><span>Replies</span></div>
+          <div class="pstat"><b>61.9%</b><span>US audience</span></div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="pcard">
+      <div class="ph">
+        <a class="ins" href="insights/post5.webp" target="_blank" rel="noopener"><img src="insights/post5.webp" alt="Reddit post insights for Anyone tried Missacc custom sizing?" loading="lazy"><span class="ins-cap">Reddit post insights ↗</span></a>
+        <div class="ph-b">
+          <div class="ph-meta"><span class="sub">r/fashionadvice</span><span class="sep">·</span><span>19 Oct</span><span class="sep">·</span><span class="fmt brand">Brand ask</span></div>
+          <h3 class="ptitle">Anyone tried Missacc custom sizing?</h3>
+        <span class="ribbon o"><b>First</b>brand-titled post of the engagement</span>
+          <div class="pstats">
+            <div class="pstat"><b>681</b><span>Views</span></div>
+            <div class="pstat"><b>3</b><span>Replies</span></div>
+          <div class="pstat"><b>16.7%</b><span>India audience</span></div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <div class="note"><b>How to read these:</b> views are Reddit's own reach counts for each post, captured from the posting account's analytics in the days after publishing. Audience share shows the top country by views; the core audience is consistently US-first, with Canada and the UK following. Three posts earned a front-page badge in their community on the day they ran.</div>
   </section>
 
   <!-- ============ COMMENTS ============ -->
@@ -703,7 +864,7 @@
           <tr>
             <td class="num">04</td><td class="date">14 Oct</td>
             <td class="sub-sm">r/fashionhelp</td>
-            <td class="topic">Tried this on for my cousin's wedding and now I&hellip;</td>
+            <td class="topic">Tried this on for my cousin's wedding and now I can't decide lol</td>
             <td><span class="fmt est">Our thread</span></td>
           </tr>
           <tr>
@@ -757,7 +918,7 @@
           <tr>
             <td class="num">13</td><td class="date">20 Oct</td>
             <td class="sub-sm">r/OUTFITS</td>
-            <td class="topic">Dressing up after a long time, this is for my&hellip;</td>
+            <td class="topic">Dressing up after a long time, this is for my retirement party</td>
             <td><span class="fmt est">Our thread</span></td>
           </tr>
           <tr>
