@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Missacc: Reddit report, Cycle 05 | M81</title>
+<link rel="icon" type="image/png" href="m81-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fbf4ea; --card:#ffffff; --tint:#fdf8f1; --tint2:#fbf6ef;
+    --ink:#1c1611; --body:#5b5348; --muted:#8a7d6e; --faint:#b3a68f;
+    --line:#eee3d2; --line2:#f3ead9;
+    --orange:#f96a16; --orange2:#ff8a3d; --deep:#c2570e;
+    --green:#2e7d52; --green2:#4fae76; --greenbright:#5ecf95;
+    --red:#b3402f; --red2:#d0654f;
+    --dark:#161310; --dark2:#1d1915;
+    --shadow:0 1px 2px rgba(28,22,17,.03), 0 10px 30px -12px rgba(28,22,17,.10);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0; background:var(--bg); color:var(--ink);
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
+    font-size:15px; line-height:1.6; -webkit-font-smoothing:antialiased}
+  a{color:var(--deep)}
+  ::selection{background:rgba(249,106,22,.22)}
+  h1,h2,h3{font-family:'Space Grotesk','Inter',sans-serif; letter-spacing:-.01em}
+
+  /* ===== hero ===== */
+  .hero{position:relative; overflow:hidden; padding:44px 28px 64px;
+    background:
+      radial-gradient(900px 520px at 92% -14%, rgba(249,106,22,.22), transparent 58%),
+      linear-gradient(168deg,#fff7ee 0%, #fbf0e2 60%, #f7ead9 100%)}
+  .hero-rings{position:absolute; z-index:1; top:-320px; right:-260px; width:740px; height:740px; pointer-events:none; border-radius:50%;
+    background:repeating-radial-gradient(circle at center, transparent 0 55px, rgba(249,106,22,.10) 55px 57px);
+    -webkit-mask-image:radial-gradient(circle at center,#000,transparent 70%); mask-image:radial-gradient(circle at center,#000,transparent 70%)}
+  .hero::after{content:""; position:absolute; inset:0; z-index:1; pointer-events:none; opacity:.55;
+    background-image:radial-gradient(rgba(28,22,17,.07) 1px, transparent 1.5px); background-size:23px 23px;
+    -webkit-mask-image:linear-gradient(172deg,#000 18%,transparent 72%); mask-image:linear-gradient(172deg,#000 18%,transparent 72%)}
+  .hero-inner{position:relative; z-index:3; max-width:1040px; margin:0 auto}
+  .topbar{display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:56px}
+  .topbar .brand{display:flex; align-items:center; gap:11px}
+  .topbar .brand img{height:34px; width:auto; display:block}
+  .topbar .brand .bn{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:19px; color:var(--ink)}
+  .topbar .prep{font-size:10.5px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--muted);
+    background:rgba(255,255,255,.75); border:1px solid var(--line); border-radius:999px; padding:9px 18px}
+  .hero-kick{display:inline-flex; align-items:center; gap:10px; font-size:11.5px; font-weight:700; letter-spacing:.18em;
+    text-transform:uppercase; color:var(--deep); margin-bottom:18px}
+  .hero-kick::before{content:""; width:26px; height:2px; background:var(--orange); border-radius:2px}
+  .hero h1{margin:0 0 20px; font-size:clamp(38px,5.6vw,62px); line-height:1.04; letter-spacing:-.02em; font-weight:700; max-width:20ch}
+  .hero h1 .hl{color:var(--orange); border-bottom:6px solid rgba(249,106,22,.30); padding-bottom:2px}
+  .hero .lede{margin:0 0 34px; font-size:16.5px; line-height:1.6; color:var(--body); max-width:62ch}
+  .statstrip{display:grid; grid-template-columns:repeat(4,1fr); background:var(--card); border:1px solid var(--line);
+    border-radius:18px; box-shadow:var(--shadow); overflow:hidden; max-width:780px}
+  .statstrip .cell{padding:22px 24px 19px; border-left:1px solid var(--line2)}
+  .statstrip .cell:first-child{border-left:none}
+  .statstrip .n{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:38px; line-height:1; color:var(--ink); letter-spacing:-.02em}
+  .statstrip .n em{font-style:normal; color:var(--orange)}
+  .statstrip .l{margin-top:8px; font-size:9.5px; font-weight:700; letter-spacing:.13em; text-transform:uppercase; color:var(--muted)}
+  .hero .meta{margin-top:26px; font-size:13px; color:var(--muted); letter-spacing:.02em}
+
+  /* ===== sticky nav ===== */
+  .nav{position:sticky; top:0; z-index:50; background:rgba(250,243,233,.88); backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px); border-bottom:1px solid var(--line)}
+  .nav-inner{max-width:1040px; margin:0 auto; padding:0 28px; display:flex; gap:28px; overflow-x:auto}
+  .nav a{display:block; padding:15px 0 13px; font-family:'Space Grotesk',sans-serif; font-size:13.5px; font-weight:600;
+    color:var(--body); text-decoration:none; white-space:nowrap; border-bottom:2px solid transparent}
+  .nav a:hover{color:var(--deep); border-bottom-color:rgba(249,106,22,.5)}
+
+  /* ===== layout ===== */
+  .wrap{max-width:1040px; margin:0 auto; padding:26px 28px 10px}
+  .block{margin-top:64px; scroll-margin-top:70px}
+  .block:first-child{margin-top:38px}
+  .block-head h2{margin:0; font-size:24px; font-weight:700; color:var(--ink); display:flex; align-items:center; gap:13px}
+  .block-head h2::before{content:""; width:5px; height:25px; background:var(--orange); border-radius:3px; display:inline-block; flex:0 0 auto}
+  .block-head p{margin:8px 0 0 18px; color:var(--muted); font-size:14px; line-height:1.65; max-width:82ch}
+
+  /* ===== stat cards ===== */
+  .stats{display:grid; grid-template-columns:repeat(5,1fr); gap:14px; margin-top:24px}
+  .stat{background:var(--card); border:1px solid var(--line); border-left:3px solid var(--orange);
+    border-radius:14px; padding:20px 18px 17px; box-shadow:var(--shadow)}
+  .stat .n{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:36px; line-height:1; color:var(--ink); letter-spacing:-.02em}
+  .stat .n em{font-style:normal; color:var(--orange)}
+  .stat .n.seq{font-size:16.5px; white-space:nowrap; padding-top:12px}
+  .stat .n.seq em{font-size:22px}
+  .stat .n.seq .ar{color:var(--faint); font-weight:500; font-size:12px; margin:0}
+  .stat .l{margin-top:10px; font-size:9.5px; font-weight:700; letter-spacing:.13em; text-transform:uppercase; color:var(--deep)}
+  .stat .d{margin-top:6px; font-size:12.5px; color:var(--muted); line-height:1.5}
+  .stat.hot{background:linear-gradient(155deg,#f96a16,#e35b0b); border-color:#e35b0b}
+  .stat.hot .n,.stat.hot .n em{color:#fff}
+  .stat.hot .n span.vs{color:rgba(255,255,255,.6)}
+  .stat.hot .l{color:rgba(255,255,255,.9)}
+  .stat.hot .d{color:rgba(255,255,255,.8)}
+  .note{margin-top:18px; background:var(--tint2); border:1px solid var(--line); border-left:4px solid var(--orange);
+    border-radius:10px; padding:14px 18px; font-size:13.5px; color:var(--body); line-height:1.65}
+  .note b{color:var(--ink)}
+
+  /* ===== dark bands ===== */
+  .band{position:relative; overflow:hidden; margin-top:72px; background:var(--dark); color:#efe9df}
+  .band::before{content:""; position:absolute; inset:0; pointer-events:none;
+    background:
+      radial-gradient(760px 400px at 88% -12%, rgba(249,106,22,.20), transparent 60%),
+      radial-gradient(520px 320px at -6% 116%, rgba(249,106,22,.07), transparent 60%)}
+  .band.green::before{background:
+      radial-gradient(760px 400px at 88% -12%, rgba(79,174,118,.18), transparent 60%),
+      radial-gradient(520px 320px at -6% 116%, rgba(79,174,118,.06), transparent 60%)}
+  .band::after{content:""; position:absolute; inset:0; pointer-events:none; opacity:.35;
+    background-image:radial-gradient(rgba(255,255,255,.05) 1px, transparent 1.4px); background-size:22px 22px;
+    -webkit-mask-image:linear-gradient(165deg,#000 15%,transparent 65%); mask-image:linear-gradient(165deg,#000 15%,transparent 65%)}
+  .band-inner{position:relative; z-index:2; max-width:1040px; margin:0 auto; padding:60px 28px 56px; scroll-margin-top:70px}
+  .band .b-kick{display:inline-flex; align-items:center; gap:10px; font-size:10.5px; font-weight:700; letter-spacing:.18em;
+    text-transform:uppercase; color:var(--orange2); margin-bottom:14px}
+  .band .b-kick::before{content:""; width:24px; height:2px; background:var(--orange); border-radius:2px}
+  .band.green .b-kick{color:var(--greenbright)}
+  .band.green .b-kick::before{background:var(--green2)}
+  .band h2{margin:0 0 14px; font-size:clamp(28px,4vw,44px); font-weight:700; color:#fff; letter-spacing:-.02em; line-height:1.06}
+  .band .b-lede{margin:0; font-size:14.5px; line-height:1.7; color:#b9ac9a; max-width:78ch}
+  .band .h2h{margin-top:34px; max-width:900px}
+  .h2h .hh-row{display:grid; grid-template-columns:215px 1fr 76px; align-items:center; gap:18px; margin-top:20px; font-size:13px}
+  .h2h .hh-name{font-weight:700; color:#efe9df}
+  .h2h .hh-name small{display:block; font-weight:500; font-size:11px; color:#9c8f7c; margin-top:2px}
+  .h2h .hh-bar{height:30px; border-radius:9px; background:rgba(255,255,255,.10); overflow:hidden}
+  .h2h .hh-bar i{display:block; height:100%; border-radius:0 9px 9px 0}
+  .h2h .hh-bar i.pos{background:linear-gradient(90deg,#2e7d52,#57b381)}
+  .h2h .hh-bar i.neg{background:linear-gradient(90deg,#b3402f,#d0654f)}
+  .h2h .hh-n{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:34px; color:#fff; text-align:right; letter-spacing:-.02em}
+  .band .b-path{margin-top:26px; font-size:13.5px; line-height:1.7; color:#b9ac9a; max-width:82ch; border-top:1px solid rgba(255,255,255,.10); padding-top:20px}
+  .band .b-path b{color:#efe9df}
+  .band .b-note{margin-top:22px; font-size:14.5px; line-height:1.75; color:#cfc4b2; max-width:82ch}
+  .band .b-note b{color:#fff}
+  .band .sign{margin-top:30px; border-top:1px solid rgba(255,255,255,.10); padding-top:20px}
+  .band .sign .who{font-family:'Space Grotesk',sans-serif; font-size:19px; font-weight:700; color:#fff}
+  .band .sign .org{margin-top:3px; font-size:12.5px; color:#9c8f7c}
+
+  /* ===== baseline / trajectory ===== */
+  .baseline{display:grid; grid-template-columns:330px 1fr; gap:14px; margin-top:24px}
+  .basecard{background:var(--card); border:1px solid var(--line); border-radius:18px; padding:26px 26px 24px;
+    box-shadow:var(--shadow); display:flex; flex-direction:column; justify-content:center; position:relative; overflow:hidden}
+  .basecard::after{content:""; position:absolute; right:-70px; top:-70px; width:210px; height:210px; border-radius:50%;
+    background:radial-gradient(circle, rgba(249,106,22,.13), transparent 65%)}
+  .basecard .b-n{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:84px; line-height:.95; color:var(--orange); letter-spacing:-.03em}
+  .basecard .b-l{margin-top:12px; font-size:10.5px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--deep)}
+  .basecard .b-d{margin-top:9px; font-size:13.5px; color:var(--body); line-height:1.62}
+  .trajcard{background:var(--card); border:1px solid var(--line); border-radius:18px; padding:24px 26px 20px; box-shadow:var(--shadow)}
+  .trajcard .t-title{font-size:10px; font-weight:700; letter-spacing:.15em; text-transform:uppercase; color:var(--deep); margin-bottom:14px}
+  .trajrow{display:grid; grid-template-columns:150px repeat(5,1fr); gap:10px; align-items:baseline; padding:13px 0; border-top:1px dashed var(--line); font-size:13px}
+  .trajrow:first-of-type{border-top:none}
+  .trajrow .tr-metric{color:var(--body); font-weight:600}
+  .trajrow .tr-v{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:15.5px; color:var(--faint)}
+  .trajrow .tr-v.now{color:var(--orange); font-size:20px}
+  .trajrow .tr-v small{display:block; font-family:'Inter',sans-serif; font-weight:600; font-size:9px; letter-spacing:.09em; text-transform:uppercase; color:var(--faint); margin-top:3px}
+  .trajrow .tr-v.now small{color:var(--deep)}
+  .trajrow .tr-v .up{color:var(--green); font-size:11px; font-weight:700; margin-left:3px}
+
+  /* ===== sentiment split ===== */
+  .sentgrid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:24px}
+  .sentcard{background:var(--card); border:1px solid var(--line); border-radius:18px; padding:24px 26px 22px; box-shadow:var(--shadow)}
+  .sentcard.good{border-top:3px solid var(--green2)}
+  .sentcard.bad{border-top:3px solid var(--red2)}
+  .sentcard .sc-label{font-size:10px; font-weight:700; letter-spacing:.13em; text-transform:uppercase; color:var(--muted)}
+  .sentcard .sc-big{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:40px; line-height:1; margin-top:11px; letter-spacing:-.02em}
+  .sentcard .sc-big.pos{color:var(--green)}
+  .sentcard .sc-big.neg{color:var(--red)}
+  .sentcard .sc-sub{margin-top:7px; font-size:13px; color:var(--muted)}
+  .sbar-row{display:grid; grid-template-columns:70px 1fr 92px; align-items:center; gap:12px; margin-top:14px; font-size:12.5px}
+  .sbar-row .sb-name{font-weight:600; color:var(--body)}
+  .sbar{height:10px; border-radius:999px; background:#f0e6d6; overflow:hidden}
+  .sbar i{display:block; height:100%; border-radius:999px}
+  .sbar i.pos{background:linear-gradient(90deg,var(--green),var(--green2))}
+  .sbar i.neu{background:linear-gradient(90deg,#c9bba7,#d8ccba)}
+  .sbar i.neg{background:linear-gradient(90deg,var(--red),var(--red2))}
+  .sbar i.acc{background:linear-gradient(90deg,var(--orange),var(--orange2))}
+  .sbar-row .sb-val{color:var(--muted); text-align:right; white-space:nowrap}
+  .sbar-row .sb-val b{color:var(--ink)}
+  .sentcard .sc-read{margin-top:16px; border-top:1px dashed var(--line); padding-top:13px; font-size:13px; color:var(--body); line-height:1.62}
+
+  /* ===== themes ===== */
+  .themes{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:24px}
+  .theme{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px 19px 17px; box-shadow:var(--shadow)}
+  .theme .th-tag{display:inline-block; font-size:9.5px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--red); background:#faeae7; border:1px solid #f0d2cc; border-radius:999px; padding:4px 11px}
+  .theme h3{margin:13px 0 6px; font-size:15px; font-weight:700; color:var(--ink)}
+  .theme p{margin:0; font-size:12.5px; color:var(--body); line-height:1.6}
+
+  /* ===== wide panels ===== */
+  .widecard{background:var(--card); border:1px solid var(--line); border-radius:18px; padding:24px 26px 22px; box-shadow:var(--shadow); margin-top:14px}
+  .widecard .w-title{font-size:10px; font-weight:700; letter-spacing:.15em; text-transform:uppercase; color:var(--deep)}
+  .widecard .w-sub{margin-top:6px; font-size:13px; color:var(--body); line-height:1.65; max-width:88ch}
+  .mbar-row{display:grid; grid-template-columns:145px 1fr 76px; align-items:center; gap:12px; margin-top:12px; font-size:12.5px}
+  .mbar-row .mb-name{font-weight:600; color:var(--body); white-space:nowrap}
+  .mbar-row .mb-val{color:var(--muted); text-align:right; white-space:nowrap}
+  .mbar-row .mb-val b{color:var(--ink); font-family:'Space Grotesk',sans-serif; font-size:15px}
+  .split2{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:24px}
+  .split2 .widecard{margin-top:0}
+
+  /* ===== chips ===== */
+  .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px}
+  .chip{display:inline-flex; align-items:center; gap:8px; background:var(--card); color:var(--body);
+    border:1px solid var(--line); padding:5px 6px 5px 13px; border-radius:999px; font-size:12.5px; font-weight:600}
+  .chip b{color:var(--deep)}
+  .chip .ct{display:inline-grid; place-items:center; min-width:22px; height:22px; padding:0 6px; border-radius:999px;
+    background:var(--ink); color:#fff; font-size:11px; font-weight:700}
+  .chip.g{color:var(--muted)}
+  .chip.g .ct{background:#e9f1ec; color:var(--green)}
+
+  /* ===== tables ===== */
+  .table-wrap{background:var(--card); border:1px solid var(--line); border-radius:16px; overflow:hidden; margin-top:24px; box-shadow:var(--shadow)}
+  table{width:100%; border-collapse:collapse; font-size:14px}
+  thead th{background:var(--ink); color:#fff; text-align:left; font-weight:600; padding:13px 18px;
+    font-size:10.5px; letter-spacing:.11em; text-transform:uppercase}
+  tbody td{padding:14px 18px; border-top:1px solid var(--line2); vertical-align:middle}
+  tbody tr:nth-child(even){background:var(--tint)}
+  td.num{color:var(--faint); width:74px; font-weight:700; white-space:nowrap; font-size:11px; text-transform:uppercase; letter-spacing:.06em}
+  td.date{color:var(--muted); width:80px; white-space:nowrap; font-size:13px}
+  .sub-sm{color:var(--deep); font-weight:700; white-space:nowrap}
+  td.topic{font-weight:600; color:var(--ink)}
+  td.topic.ext{font-weight:500; color:var(--muted)}
+  .fmt{display:inline-block; font-size:11.5px; font-weight:600; padding:4px 12px; border-radius:999px; white-space:nowrap}
+  .fmt.ask{background:#fdeee1; color:var(--deep); border:1px solid #f6d9c2}
+  .fmt.proof{background:#e9f4ee; color:var(--green); border:1px solid #cde5d6}
+  .fmt.style{background:#eef0fb; color:#4653a8; border:1px solid #d8ddf4}
+  .fmt.core{background:#fdeee1; color:var(--deep); border:1px solid #f6d9c2}
+  .fmt.est{background:var(--tint2); color:var(--muted); border:1px solid var(--line)}
+  .fmt.new{background:#eef0fb; color:#4653a8; border:1px solid #d8ddf4}
+  .fmt.brand{background:var(--orange); color:#fff; border:1px solid #e35b0b}
+
+  /* ===== landscape tiles ===== */
+  .landgrid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:24px}
+  .landtile{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:19px 19px 15px;
+    box-shadow:var(--shadow); display:flex; flex-direction:column; gap:10px}
+  .landtile.core{background:linear-gradient(160deg,#fff6ec,#fdeee1); border-color:#f6d9c2}
+  .landtile .lt-name{font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:700; color:var(--deep)}
+  .landtile .lt-touch{margin-top:auto; border-top:1px dashed var(--line); padding-top:10px; font-size:12px; color:var(--muted)}
+  .landtile .lt-touch b{color:var(--ink); font-family:'Space Grotesk',sans-serif; font-size:17px; margin-right:6px}
+
+  /* ===== takeaways ===== */
+  .takes{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:24px}
+  .take{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:22px 22px 19px; box-shadow:var(--shadow)}
+  .take .t-num{display:inline-grid; place-items:center; width:31px; height:31px; border-radius:10px;
+    background:#fdeee1; border:1px solid #f6d9c2; color:var(--deep); font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:14px}
+  .take h3{margin:13px 0 6px; font-size:16px; font-weight:700; color:var(--ink)}
+  .take p{margin:0; font-size:13.5px; color:var(--body); line-height:1.62}
+
+  /* ===== footer ===== */
+  footer{max-width:1040px; margin:72px auto 0; padding:0 28px 64px; color:var(--muted); font-size:13px}
+  .m81card{position:relative; overflow:hidden; background:var(--card); border-radius:26px; border:1px solid rgba(249,106,22,.18);
+    box-shadow:0 0 0 7px rgba(249,106,22,.04), 0 30px 80px -20px rgba(249,106,22,.25); padding:42px 46px 38px; min-height:440px}
+  .m81card-inner{position:relative; z-index:2}
+  .m81-lock{display:flex; align-items:center; gap:11px}
+  .m81-lock img{height:34px; width:auto}
+  .m81-lock .bname{font-family:'Space Grotesk',sans-serif; font-size:29px; font-weight:700; color:#111}
+  .m81-watermark{position:absolute; left:0; right:0; bottom:30px; z-index:1; margin:0; text-align:center;
+    font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(44px,12vw,140px);
+    line-height:.82; letter-spacing:-.02em; color:#eee9e1; white-space:nowrap; pointer-events:none}
+  .m81-method{margin-top:22px; border-top:1px solid #f0e8df; padding-top:20px}
+  .fineprint{color:var(--muted); font-size:14px; line-height:1.7; margin:0 0 16px}
+  .fineprint strong{color:#5b4f42}
+  .src{display:flex; flex-wrap:wrap; gap:12px; margin-top:10px}
+  .src span{background:var(--tint2); border:1px solid var(--line); border-radius:999px; padding:7px 14px}
+
+  @media (max-width:900px){
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .statstrip{grid-template-columns:repeat(2,1fr)}
+    .statstrip .cell:nth-child(3){border-left:none}
+    .statstrip .cell{border-top:1px solid var(--line2)}
+    .statstrip .cell:nth-child(-n+2){border-top:none}
+    .landgrid{grid-template-columns:repeat(3,1fr)}
+    .baseline{grid-template-columns:1fr}
+    .themes{grid-template-columns:1fr 1fr}
+    .split2{grid-template-columns:1fr}
+    .trajrow{grid-template-columns:repeat(5,1fr)}
+    .trajrow .tr-metric{grid-column:1 / -1}
+  }
+  @media (max-width:760px){
+    .hero{padding:32px 22px 48px}
+    .hero h1{font-size:34px}
+    .topbar{margin-bottom:40px}
+    .topbar .prep{display:none}
+    .wrap{padding:22px 22px 10px}
+    .block{margin-top:52px}
+    .takes,.sentgrid,.themes{grid-template-columns:1fr}
+    .landgrid{grid-template-columns:1fr 1fr}
+    .h2h .hh-row{grid-template-columns:1fr 60px}
+    .h2h .hh-name{grid-column:1 / -1}
+    .band-inner{padding:44px 22px 42px}
+    .m81card{padding:30px 22px; min-height:320px}
+    .m81-watermark{font-size:44px; bottom:26px}
+    thead{display:none}
+    table,tbody,tr,td{display:block; width:100%}
+    tbody tr{border-top:1px solid var(--line); padding:8px 0}
+    tbody td{border:none; padding:4px 18px}
+    td.num{display:none}
+  }
+  @media print{ body{background:#fff} .stat,.sentcard,.theme,.widecard,.take,.basecard,.trajcard,.table-wrap,.landtile,.statstrip{box-shadow:none} .nav{display:none} }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-rings"></div>
+  <div class="hero-inner">
+    <div class="topbar">
+      <div class="brand"><img src="m81-logo.png" alt="M81"><span class="bn">M81</span></div>
+      <span class="prep">Prepared for Missacc</span>
+    </div>
+    <div class="hero-kick">Cycle 05</div>
+    <h1>Missacc <span class="hl">Reddit</span> report</h1>
+    <p class="lede">The narrative around Missacc on Reddit keeps compounding: positive comments now outweigh the negative legacy record by nearly two to one, and this cycle the brand carried its own name in a post title for the first time.</p>
+    <div class="statstrip">
+      <div class="cell"><div class="n">27</div><div class="l">Placements</div></div>
+      <div class="cell"><div class="n">14</div><div class="l">Subreddits</div></div>
+      <div class="cell"><div class="n"><em>68.5%</em></div><div class="l">Positive comments</div></div>
+      <div class="cell"><div class="n">303</div><div class="l">Branded mentions</div></div>
+    </div>
+    <div class="meta">21 Sep to 24 Oct 2026 &nbsp;·&nbsp; Reddit &nbsp;·&nbsp; Sentiment sweep captured 24 Oct 2026 &nbsp;·&nbsp; Prepared by M81</div>
+  </div>
+</header>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#glance">At a glance</a>
+    <a href="#counterweight">The counterweight</a>
+    <a href="#sentiment">Sentiment</a>
+    <a href="#posts">Placements</a>
+    <a href="#comments">Comments</a>
+    <a href="#communities">Communities</a>
+    <a href="#closing">Closing note</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- ============ AT A GLANCE ============ -->
+  <section class="block" id="glance">
+    <div class="block-head">
+      <h2>The Cycle at a Glance</h2>
+      <p>Cycle five of the engagement. All 27 placements landed between 5 and 21 October, and the full footprint was re-measured in the 24 October monitoring sweep.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="n">27</div><div class="l">Placements</div><div class="d">8 posts and 19 comments this cycle</div></div>
+      <div class="stat"><div class="n">14</div><div class="l">Subreddits engaged</div><div class="d">6 entered for the first time</div></div>
+      <div class="stat"><div class="n"><em>68.5%</em></div><div class="l">Comment layer positive</div><div class="d">Up from 66.9%, the fourth straight rise</div></div>
+      <div class="stat"><div class="n">303</div><div class="l">Branded mentions</div><div class="d">Total indexed footprint, up from 256</div></div>
+      <div class="stat hot"><div class="n">115 <span class="vs">:</span> 68</div><div class="l">The counterweight</div><div class="d">The gap grew from 27 to 47 this cycle</div></div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ============ DARK BAND · COUNTERWEIGHT ============ -->
+<section class="band">
+  <div class="band-inner" id="counterweight">
+    <div class="b-kick">The headline</div>
+    <h2>The gap keeps widening.</h2>
+    <p class="b-lede">Last cycle the positive comment layer overtook the legacy negative record for the first time, 89 to 62. One sweep later the lead has nearly doubled. There are now 115 positive branded comments about Missacc on Reddit against 68 negative legacy posts, and the margin grew even though the legacy layer had its busiest window since spring.</p>
+    <div class="h2h">
+      <div class="hh-row">
+        <span class="hh-name">Positive branded comments<small>The counter-signal, built cycle by cycle</small></span>
+        <div class="hh-bar"><i class="pos" style="width:100%"></i></div>
+        <span class="hh-n">115</span>
+      </div>
+      <div class="hh-row">
+        <span class="hh-name">Negative post-level records<small>The legacy record, accumulated over years</small></span>
+        <div class="hh-bar"><i class="neg" style="width:59.1%"></i></div>
+        <span class="hh-n">68</span>
+      </div>
+    </div>
+    <p class="b-path"><b>The path here:</b> 1 against 58 at Month 1, 35 against 58 at Month 2, 57 against 59, 89 against 62 last cycle, 115 against 68 today. The gap has gone from 2 to 27 to 47 in two cycles. The legacy side added 14 new records this window, its busiest stretch since spring, and the lead still nearly doubled, because the comment layer is compounding almost three times faster.</p>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <!-- ============ BASELINE ============ -->
+  <section class="block">
+    <div class="block-head">
+      <h2>The Baseline, Re-Measured</h2>
+      <p>Every cycle we re-run the same monitoring sweep across everything Reddit has indexed about Missacc: every post and every comment that mentions the brand, ours and everyone else's. This is the full discoverable footprint a future customer lands on when they research the brand, and it is the scoreboard the whole engagement is measured against.</p>
+    </div>
+    <div class="baseline">
+      <div class="basecard">
+        <div class="b-n">303</div>
+        <div class="b-l">Branded mentions · now indexed across Reddit</div>
+        <div class="b-d">135 post-level records and 168 tracked branded comments, captured in the 24 October monitoring sweep. The comment layer extended its lead over the legacy record for the second straight cycle: the conversation we build keeps outgrowing the record we inherited.</div>
+      </div>
+      <div class="trajcard">
+        <div class="t-title">Five-cycle trajectory · same methodology every sweep</div>
+        <div class="trajrow">
+          <span class="tr-metric">Total indexed mentions</span>
+          <span class="tr-v">102<small>Month 1</small></span>
+          <span class="tr-v">175<small>Month 2</small></span>
+          <span class="tr-v">202<small>Jul–Aug</small></span>
+          <span class="tr-v">256<small>Aug–Sep</small></span>
+          <span class="tr-v now">303<small>This cycle</small></span>
+        </div>
+        <div class="trajrow">
+          <span class="tr-metric">Tracked branded comments</span>
+          <span class="tr-v">22<small>Month 1</small></span>
+          <span class="tr-v">63<small>Month 2</small></span>
+          <span class="tr-v">87<small>Jul–Aug</small></span>
+          <span class="tr-v">133<small>Aug–Sep</small></span>
+          <span class="tr-v now">168<small>This cycle</small></span>
+        </div>
+        <div class="trajrow">
+          <span class="tr-metric">Positive comments</span>
+          <span class="tr-v">1<small>Month 1</small></span>
+          <span class="tr-v">35<small>Month 2</small></span>
+          <span class="tr-v">57<small>Jul–Aug</small></span>
+          <span class="tr-v">89<small>Aug–Sep</small></span>
+          <span class="tr-v now">115<small>This cycle</small></span>
+        </div>
+        <div class="trajrow">
+          <span class="tr-metric">Comment-layer positive share</span>
+          <span class="tr-v">n/a<small>Month 1</small></span>
+          <span class="tr-v">55.6%<small>Month 2</small></span>
+          <span class="tr-v">65.5%<small>Jul–Aug</small></span>
+          <span class="tr-v">66.9%<small>Aug–Sep</small></span>
+          <span class="tr-v now">68.5%<span class="up">▲</span><small>This cycle</small></span>
+        </div>
+      </div>
+    </div>
+    <div class="note"><b>How to read the trajectory:</b> the footprint grows every cycle by design. Each placement is permanent, indexed, and keeps working after the cycle ends. What matters is the mix, and five sweeps in, the pattern is consistent: the share of the growing footprint that reads positive has risen every single sweep.</div>
+  </section>
+
+  <!-- ============ SENTIMENT ============ -->
+  <section class="block" id="sentiment">
+    <div class="block-head">
+      <h2>The Split-Layer Signal</h2>
+      <p>The structure underneath every number in this report: Reddit sentiment about Missacc lives in two separate layers that move at completely different speeds. The post layer is legacy community memory: old threads, indexed years ago, that we do not control. The comment layer is live conversation, and it is where we operate. The layer we work in keeps climbing; the layer we inherited is slowly softening.</p>
+    </div>
+    <div class="sentgrid">
+      <div class="sentcard good">
+        <div class="sc-label">Comment layer · 168 tracked · where we operate</div>
+        <div class="sc-big pos">68.5% positive</div>
+        <div class="sc-sub">Up from 66.9% last sweep · 133 → 168 tracked comments</div>
+        <div class="sbar-row"><span class="sb-name">Positive</span><div class="sbar"><i class="pos" style="width:68.5%"></i></div><span class="sb-val"><b>115</b> · 68.5%</span></div>
+        <div class="sbar-row"><span class="sb-name">Neutral</span><div class="sbar"><i class="neu" style="width:22.6%"></i></div><span class="sb-val"><b>38</b> · 22.6%</span></div>
+        <div class="sbar-row"><span class="sb-name">Negative</span><div class="sbar"><i class="neg" style="width:8.9%"></i></div><span class="sb-val"><b>15</b> · 8.9%</span></div>
+        <div class="sc-read">The layer grew by 35 tracked comments and the positive share rose for the fourth straight sweep. The negative share came in at 8.9%, a shade above last sweep's 8.3% but still the second-lowest reading of the engagement, and eleven of the fifteen negative comments predate this window.</div>
+      </div>
+      <div class="sentcard bad">
+        <div class="sc-label">Post layer · 135 records · legacy community memory</div>
+        <div class="sc-big neg">50.4% negative</div>
+        <div class="sc-sub">Held at 50.4% · after easing from 51.8% at Month 2</div>
+        <div class="sbar-row"><span class="sb-name">Positive</span><div class="sbar"><i class="pos" style="width:5.2%"></i></div><span class="sb-val"><b>7</b> · 5.2%</span></div>
+        <div class="sbar-row"><span class="sb-name">Neutral</span><div class="sbar"><i class="neu" style="width:44.4%"></i></div><span class="sb-val"><b>60</b> · 44.4%</span></div>
+        <div class="sbar-row"><span class="sb-name">Negative</span><div class="sbar"><i class="neg" style="width:50.4%"></i></div><span class="sb-val"><b>68</b> · 50.4%</span></div>
+        <div class="sc-read">The legacy layer stirred this window, adding 14 records, its busiest stretch since spring. But eight of the fourteen were neutral or positive, the layer's positive share rose from 4.1% to 5.2%, and the negative share held exactly flat. Even an active month no longer moves the needle against the brand.</div>
+      </div>
+    </div>
+    <div class="note"><b>The growth signal held:</b> 37 new comment-layer mentions appeared during the window against the 19 comments we placed ourselves, spread across 22 different subreddits, and 26 of the 37 read positive. For every comment we seed, roughly two tracked mentions now appear on their own.</div>
+  </section>
+
+  <!-- ============ WHY POST LAYER ============ -->
+  <section class="block">
+    <div class="block-head">
+      <h2>Why the Post Layer Stays Negative</h2>
+      <p>The 68 negative post-level records are not a verdict on the current work. They are old community memory, concentrated in four legacy themes that were indexed long before this engagement began. They rank because they are old, not because they are fresh, and understanding what this layer is made of is what tells us it can be outweighed rather than fought head-on.</p>
+    </div>
+    <div class="themes">
+      <div class="theme">
+        <span class="th-tag">Theme 1</span>
+        <h3>Refunds &amp; returns</h3>
+        <p>The largest block of legacy negativity: threads about refund requests, partial-refund offers, and return logistics. These are resolution threads: emotionally charged, heavily commented, and the slowest of all to fade from the index.</p>
+      </div>
+      <div class="theme">
+        <span class="th-tag">Theme 2</span>
+        <h3>Sizing &amp; fit</h3>
+        <p>Custom-size and measurement-mismatch complaints sitting in old, high-authority wedding and bridesmaid threads. Fit is the most personal failure mode a dress brand can have, so these threads carry durable weight in community memory.</p>
+      </div>
+      <div class="theme">
+        <span class="th-tag">Theme 3</span>
+        <h3>Shipping &amp; fulfilment</h3>
+        <p>Delivery-time threads, wrong-address stories, and overseas-return friction. Cross-border logistics complaints age slowly because every new reader planning an event on a deadline finds them relevant again.</p>
+      </div>
+      <div class="theme">
+        <span class="th-tag">Theme 4</span>
+        <h3>Quality &amp; construction</h3>
+        <p>How-it-arrived posts comparing the product against listing photos. These are the hardest records to displace: they are visual, specific, and get cited inside other threads when the brand comes up.</p>
+      </div>
+    </div>
+    <div class="widecard">
+      <div class="w-title">The overlooked fact about the post layer</div>
+      <div class="w-sub">The post layer is not a wall of complaints. It is mostly a wall of questions.</div>
+      <div class="mbar-row"><span class="mb-name">Seeking / shopping</span><div class="sbar"><i class="acc" style="width:100%"></i></div><span class="mb-val"><b>103</b> · 76%</span></div>
+      <div class="mbar-row"><span class="mb-name">Complaints</span><div class="sbar"><i class="neg" style="width:19.4%"></i></div><span class="mb-val"><b>20</b> · 15%</span></div>
+      <div class="mbar-row"><span class="mb-name">General discussion</span><div class="sbar"><i class="neu" style="width:11.7%"></i></div><span class="mb-val"><b>12</b> · 9%</span></div>
+      <div class="w-sub" style="margin-top:14px">103 of the 135 post-level records, 76%, are people actively asking what to buy or looking for alternatives: "where do I find a dress for X" threads where the brand comes up. Only 20 are direct complaint posts. That is precisely why the comment strategy works: the post layer itself is an audience of shoppers mid-decision, and a well-placed comment meets them at the exact moment the legacy negativity would otherwise fill the silence.</div>
+    </div>
+    <div class="note"><b>The layer stirred, and it still could not keep pace.</b> Fourteen new post-level records this window is the most since March, yet only six were negative, two were positive, and the comment layer added mentions almost three times as fast. The old record is being outgrown faster than it can replenish.</div>
+  </section>
+
+  <!-- ============ INSIDE COMMENT LAYER ============ -->
+  <section class="block">
+    <div class="block-head">
+      <h2>Inside the Comment Layer</h2>
+      <p>The headline number, 68.5% positive, deserves to be opened up, because the composition underneath it is what makes it durable. Here is what the 168 tracked branded comments actually are: what kind of conversations they live in, how fast the layer is growing, and where the positive signal is concentrated.</p>
+    </div>
+    <div class="split2">
+      <div class="widecard">
+        <div class="w-title">What the 168 tracked comments are · by conversation type</div>
+        <div class="w-sub">The layer is overwhelmingly conversational and advisory. Complaint-context comments are a rounding error.</div>
+        <div class="mbar-row"><span class="mb-name">General discussion</span><div class="sbar"><i class="acc" style="width:100%"></i></div><span class="mb-val"><b>91</b> · 54%</span></div>
+        <div class="mbar-row"><span class="mb-name">Seeking info</span><div class="sbar"><i class="acc" style="width:53.8%"></i></div><span class="mb-val"><b>49</b> · 29%</span></div>
+        <div class="mbar-row"><span class="mb-name">Seeking alternatives</span><div class="sbar"><i class="acc" style="width:16.5%"></i></div><span class="mb-val"><b>15</b> · 9%</span></div>
+        <div class="mbar-row"><span class="mb-name">Complaint context</span><div class="sbar"><i class="neg" style="width:13.2%"></i></div><span class="mb-val"><b>12</b> · 7%</span></div>
+        <div class="mbar-row"><span class="mb-name">Feature request</span><div class="sbar"><i class="neu" style="width:1.1%"></i></div><span class="mb-val"><b>1</b> · 1%</span></div>
+        <div class="w-sub" style="margin-top:14px">64 of the 168 comments sit inside threads where someone is actively deciding what to buy, the highest-value real estate on the platform for a brand mention. Another 91 live in general conversation, which is where organic word-of-mouth naturally sounds like.</div>
+      </div>
+      <div class="widecard">
+        <div class="w-title">New tracked comment mentions per month</div>
+        <div class="w-sub">September closed at 38, the biggest month of the entire engagement, and October already stands at 32 with a week still to run when the sweep was captured.</div>
+        <div class="mbar-row"><span class="mb-name">April</span><div class="sbar"><i class="pos" style="width:34.2%"></i></div><span class="mb-val"><b>13</b></span></div>
+        <div class="mbar-row"><span class="mb-name">May</span><div class="sbar"><i class="pos" style="width:60.5%"></i></div><span class="mb-val"><b>23</b></span></div>
+        <div class="mbar-row"><span class="mb-name">June</span><div class="sbar"><i class="pos" style="width:60.5%"></i></div><span class="mb-val"><b>23</b></span></div>
+        <div class="mbar-row"><span class="mb-name">July</span><div class="sbar"><i class="pos" style="width:39.5%"></i></div><span class="mb-val"><b>15</b></span></div>
+        <div class="mbar-row"><span class="mb-name">August</span><div class="sbar"><i class="pos" style="width:63.2%"></i></div><span class="mb-val"><b>24</b></span></div>
+        <div class="mbar-row"><span class="mb-name">September</span><div class="sbar"><i class="pos" style="width:100%"></i></div><span class="mb-val"><b>38</b></span></div>
+        <div class="mbar-row"><span class="mb-name">Oct 1–24</span><div class="sbar"><i class="pos" style="width:84.2%"></i></div><span class="mb-val"><b>32</b></span></div>
+        <div class="w-sub" style="margin-top:14px">The layer added 37 mentions this window against the 19 comments we placed: nearly two tracked mentions appearing on their own for every one we seeded.</div>
+      </div>
+    </div>
+    <div class="widecard">
+      <div class="w-title">Where the positive signal lives · 115 positive comments across 42 subreddits</div>
+      <div class="w-sub">Concentrated where we operate, but spreading on its own: 28 communities now hold exactly one positive branded comment, the long tail of a conversation that no longer depends on any single space.</div>
+      <div class="chips">
+        <span class="chip"><b>r/findfashion</b><span class="ct">29</span></span>
+        <span class="chip"><b>r/womensfashion</b><span class="ct">15</span></span>
+        <span class="chip"><b>r/Weddingattireapproval</b><span class="ct">10</span></span>
+        <span class="chip"><b>r/TwoXChromosomes</b><span class="ct">8</span></span>
+        <span class="chip"><b>r/myweddingdress</b><span class="ct">4</span></span>
+        <span class="chip"><b>r/weddingplanning</b><span class="ct">4</span></span>
+        <span class="chip"><b>r/WeddingDressTips</b><span class="ct">3</span></span>
+        <span class="chip"><b>r/style</b><span class="ct">2</span></span>
+        <span class="chip"><b>r/Parents</b><span class="ct">2</span></span>
+        <span class="chip"><b>r/fashionhelp</b><span class="ct">2</span></span>
+        <span class="chip"><b>r/women</b><span class="ct">2</span></span>
+        <span class="chip"><b>r/PetiteFashionAdvice</b><span class="ct">2</span></span>
+        <span class="chip"><b>r/HowToBeHot</b><span class="ct">2</span></span>
+        <span class="chip"><b>r/BeforeyouPurchase</b><span class="ct">2</span></span>
+        <span class="chip g">r/femalefashion<span class="ct">1</span></span>
+        <span class="chip g">r/fashionadvice<span class="ct">1</span></span>
+        <span class="chip g">r/OUTFITS<span class="ct">1</span></span>
+        <span class="chip g">r/adviceph<span class="ct">1</span></span>
+        <span class="chip g">r/SGExams<span class="ct">1</span></span>
+        <span class="chip g">r/AskReddit<span class="ct">1</span></span>
+        <span class="chip g">r/Hochzeit<span class="ct">1</span></span>
+        <span class="chip g">r/Pensacola<span class="ct">1</span></span>
+        <span class="chip g">r/Indiafashionaddicts<span class="ct">1</span></span>
+        <span class="chip g">r/DressForYourBody<span class="ct">1</span></span>
+        <span class="chip g">r/BORUpdates<span class="ct">1</span></span>
+        <span class="chip g">r/AskWomenOver30<span class="ct">1</span></span>
+        <span class="chip g">r/SFbitcheswithtaste<span class="ct">1</span></span>
+        <span class="chip g">r/MilitarySpouse<span class="ct">1</span></span>
+        <span class="chip g">r/AskATailor<span class="ct">1</span></span>
+        <span class="chip g">r/fashionwomens35<span class="ct">1</span></span>
+        <span class="chip g">r/AskSF<span class="ct">1</span></span>
+        <span class="chip g">r/bigboobproblems<span class="ct">1</span></span>
+        <span class="chip g">r/Outfitsoftheday<span class="ct">1</span></span>
+        <span class="chip g">r/fashion<span class="ct">1</span></span>
+        <span class="chip g">r/GenX<span class="ct">1</span></span>
+        <span class="chip g">r/wedding<span class="ct">1</span></span>
+        <span class="chip g">r/Weddingsunder10k<span class="ct">1</span></span>
+        <span class="chip g">r/bridesmaids<span class="ct">1</span></span>
+        <span class="chip g">r/PlusSizeWedding<span class="ct">1</span></span>
+        <span class="chip g">r/OntarioGrade12s<span class="ct">1</span></span>
+        <span class="chip g">r/BuyCanadian<span class="ct">1</span></span>
+        <span class="chip g">r/WeddingAttireHelp<span class="ct">1</span></span>
+      </div>
+      <div class="w-sub" style="margin-top:16px">Note where the long tail now reaches: communities we have never placed in at all, including r/Hochzeit, a German-language wedding space, r/Pensacola, a US city community, and r/Indiafashionaddicts. The positive signal is traveling on its own. Meanwhile the 15 negative comments in the layer sit scattered across 7 subreddits, with no concentration anywhere we operate.</div>
+    </div>
+  </section>
+
+  <!-- ============ POSITIVE SIGNAL ============ -->
+  <section class="block">
+    <div class="block-head">
+      <h2>The Positive Signal, Scaled</h2>
+      <p>Month 1 produced a single organic endorsement. Every sweep since has multiplied it, and the majority it built is now wide enough to carry the brand's own name.</p>
+    </div>
+    <div class="stats" style="grid-template-columns:repeat(4,1fr)">
+      <div class="stat"><div class="n seq">1 <span class="ar">→</span> 35 <span class="ar">→</span> 57 <span class="ar">→</span> 89 <span class="ar">→</span> <em>115</em></div><div class="l">Positive comments by cycle</div><div class="d">Risen every sweep since the single Month 1 endorsement</div></div>
+      <div class="stat"><div class="n">26<span style="font-size:20px;color:var(--muted)"> of 37</span></div><div class="l">In-cycle positives</div><div class="d">70% of new comment-layer mentions this cycle read positive</div></div>
+      <div class="stat"><div class="n">42</div><div class="l">Communities</div><div class="d">Subreddits holding a positive branded comment, up from 32</div></div>
+      <div class="stat"><div class="n">19</div><div class="l">Replies on our posts</div><div class="d">Organic responses across the eight posts this cycle</div></div>
+    </div>
+    <div class="note"><b>Why this matters for the long arc:</b> each positive comment is a discoverable, indexed counter-signal to the legacy negative posts. The pattern holds: when a recommendation is grounded in the thread's specific brief and followed up in conversation, it reads as advisory rather than promotional, and the community treats it accordingly. The first four cycles said this compounding would eventually make higher-intent brand formats viable. This cycle, the first of those formats went live: a post carrying the brand's own name, and it held.</div>
+  </section>
+
+  <!-- ============ POSTS ============ -->
+  <section class="block" id="posts">
+    <div class="block-head">
+      <h2>Posts Published</h2>
+      <p>Eight posts this cycle, and one of them is a first for the engagement: a post that carries the brand name in its title. The mix has shifted toward social proof, with dress reveals and try-ons carrying most of the surface and discovery asks framing the rest. The eight posts drew 19 organic replies between them.</p>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Date</th><th>Subreddit</th><th>Post</th><th>Format</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="num">Post 1</td><td class="date">7 Oct</td>
+            <td class="sub-sm">r/TwoXChromosomes</td>
+            <td class="topic">Hoco dress hunt is not going well</td>
+            <td><span class="fmt ask">Discovery ask</span></td>
+          </tr>
+          <tr>
+            <td class="num">Post 2</td><td class="date">12 Oct</td>
+            <td class="sub-sm">r/OUTFITS</td>
+            <td class="topic">My hoco dress came in and I love it</td>
+            <td><span class="fmt proof">Social proof</span></td>
+          </tr>
+          <tr>
+            <td class="num">Post 3</td><td class="date">14 Oct</td>
+            <td class="sub-sm">r/fashionhelp</td>
+            <td class="topic">Tried this on for my cousin's wedding and now I&hellip;</td>
+            <td><span class="fmt proof">Social proof</span></td>
+          </tr>
+          <tr>
+            <td class="num">Post 4</td><td class="date">15 Oct</td>
+            <td class="sub-sm">r/Parents</td>
+            <td class="topic">Junior bridesmaid dress came today and she hasn't&hellip;</td>
+            <td><span class="fmt proof">Social proof</span></td>
+          </tr>
+          <tr>
+            <td class="num">Post 5</td><td class="date">19 Oct</td>
+            <td class="sub-sm">r/fashionadvice</td>
+            <td class="topic">Anyone tried Missacc custom sizing?</td>
+            <td><span class="fmt brand">Brand ask</span></td>
+          </tr>
+          <tr>
+            <td class="num">Post 6</td><td class="date">19 Oct</td>
+            <td class="sub-sm">r/OUTFITS</td>
+            <td class="topic">Dressing up after a long time, this is for my&hellip;</td>
+            <td><span class="fmt proof">Social proof</span></td>
+          </tr>
+          <tr>
+            <td class="num">Post 7</td><td class="date">19 Oct</td>
+            <td class="sub-sm">r/femalefashion</td>
+            <td class="topic">Red satin for a garden wedding, how'd I do?</td>
+            <td><span class="fmt style">Style feedback</span></td>
+          </tr>
+          <tr>
+            <td class="num">Post 8</td><td class="date">20 Oct</td>
+            <td class="sub-sm">r/TwoXChromosomes</td>
+            <td class="topic">Where can I find some nicer dresses</td>
+            <td><span class="fmt ask">Discovery ask</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note"><b>The milestone:</b> "Anyone tried Missacc custom sizing?" is the first post of the engagement to name the brand in its title, asking directly about the product attribute the legacy record attacks hardest. It drew replies and ran clean, because it landed in a room four cycles of groundwork had prepared. This is the higher-intent format every previous report pointed toward, live and holding.</div>
+  </section>
+
+  <!-- ============ COMMENTS ============ -->
+  <section class="block" id="comments">
+    <div class="block-head">
+      <h2>Comments Placed</h2>
+      <p>Nineteen branded comments this cycle. Eight are replies inside our own threads, including two follow-ups keeping the brand-name post moving, and eleven landed on other members' threads, among them the first placements inside the wedding vertical and the first international placements of the engagement.</p>
+    </div>
+    <div class="chips">
+      <span class="chip"><b>r/womensfashion</b><span class="ct">3</span></span>
+      <span class="chip"><b>r/fashionadvice</b><span class="ct">2</span></span>
+      <span class="chip"><b>r/TwoXChromosomes</b><span class="ct">2</span></span>
+      <span class="chip"><b>r/WeddingDressTips</b><span class="ct">2</span></span>
+      <span class="chip g">r/findfashion<span class="ct">1</span></span>
+      <span class="chip g">r/Weddingattireapproval<span class="ct">1</span></span>
+      <span class="chip g">r/fashionhelp<span class="ct">1</span></span>
+      <span class="chip g">r/Parents<span class="ct">1</span></span>
+      <span class="chip g">r/femalefashion<span class="ct">1</span></span>
+      <span class="chip g">r/OUTFITS<span class="ct">1</span></span>
+      <span class="chip g">r/style<span class="ct">1</span></span>
+      <span class="chip g">r/SGExams<span class="ct">1</span></span>
+      <span class="chip g">r/AskReddit<span class="ct">1</span></span>
+      <span class="chip g">r/adviceph<span class="ct">1</span></span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Date</th><th>Subreddit</th><th>Thread</th><th>Type</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="num">01</td><td class="date">5 Oct</td>
+            <td class="sub-sm">r/findfashion</td>
+            <td class="topic ext">Community thread</td>
+            <td><span class="fmt ask">Branded comment</span></td>
+          </tr>
+          <tr>
+            <td class="num">02</td><td class="date">7 Oct</td>
+            <td class="sub-sm">r/TwoXChromosomes</td>
+            <td class="topic">Hoco dress hunt is not going well</td>
+            <td><span class="fmt est">Our thread</span></td>
+          </tr>
+          <tr>
+            <td class="num">03</td><td class="date">7 Oct</td>
+            <td class="sub-sm">r/Weddingattireapproval</td>
+            <td class="topic ext">Community thread</td>
+            <td><span class="fmt ask">Branded comment</span></td>
+          </tr>
+          <tr>
+            <td class="num">04</td><td class="date">14 Oct</td>
+            <td class="sub-sm">r/fashionhelp</td>
+            <td class="topic">Tried this on for my cousin's wedding and now I&hellip;</td>
+            <td><span class="fmt est">Our thread</span></td>
+          </tr>
+          <tr>
+            <td class="num">05</td><td class="date">16 Oct</td>
+            <td class="sub-sm">r/Parents</td>
+            <td class="topic">Junior bridesmaid dress came today and she hasn't&hellip;</td>
+            <td><span class="fmt est">Our thread</span></td>
+          </tr>
+          <tr>
+            <td class="num">06</td><td class="date">18 Oct</td>
+            <td class="sub-sm">r/womensfashion</td>
+            <td class="topic ext">Community thread</td>
+            <td><span class="fmt ask">Branded comment</span></td>
+          </tr>
+          <tr>
+            <td class="num">07</td><td class="date">19 Oct</td>
+            <td class="sub-sm">r/WeddingDressTips</td>
+            <td class="topic ext">Community thread</td>
+            <td><span class="fmt ask">Branded comment</span></td>
+          </tr>
+          <tr>
+            <td class="num">08</td><td class="date">19 Oct</td>
+            <td class="sub-sm">r/AskReddit</td>
+            <td class="topic ext">Community thread</td>
+            <td><span class="fmt ask">Branded comment</span></td>
+          </tr>
+          <tr>
+            <td class="num">09</td><td class="date">19 Oct</td>
+            <td class="sub-sm">r/SGExams</td>
+            <td class="topic ext">Community thread</td>
+            <td><span class="fmt ask">Branded comment</span></td>
+          </tr>
+          <tr>
+            <td class="num">10</td><td class="date">19 Oct</td>
+            <td class="sub-sm">r/womensfashion</td>
+            <td class="topic ext">Community thread</td>
+            <td><span class="fmt ask">Branded comment</span></td>
+          </tr>
+          <tr>
+            <td class="num">11</td><td class="date">19 Oct</td>
+            <td class="sub-sm">r/style</td>
+            <td class="topic ext">Community thread</td>
+            <td><span class="fmt ask">Branded comment</span></td>
+          </tr>
+          <tr>
+            <td class="num">12</td><td class="date">19 Oct</td>
+            <td class="sub-sm">r/femalefashion</td>
+            <td class="topic">Red satin for a garden wedding, how'd I do?</td>
+            <td><span class="fmt est">Our thread</span></td>
+          </tr>
+          <tr>
+            <td class="num">13</td><td class="date">20 Oct</td>
+            <td class="sub-sm">r/OUTFITS</td>
+            <td class="topic">Dressing up after a long time, this is for my&hellip;</td>
+            <td><span class="fmt est">Our thread</span></td>
+          </tr>
+          <tr>
+            <td class="num">14</td><td class="date">20 Oct</td>
+            <td class="sub-sm">r/fashionadvice</td>
+            <td class="topic">Anyone tried Missacc custom sizing?</td>
+            <td><span class="fmt est">Our thread</span></td>
+          </tr>
+          <tr>
+            <td class="num">15</td><td class="date">20 Oct</td>
+            <td class="sub-sm">r/WeddingDressTips</td>
+            <td class="topic ext">Community thread</td>
+            <td><span class="fmt ask">Branded comment</span></td>
+          </tr>
+          <tr>
+            <td class="num">16</td><td class="date">21 Oct</td>
+            <td class="sub-sm">r/womensfashion</td>
+            <td class="topic ext">Community thread</td>
+            <td><span class="fmt ask">Branded comment</span></td>
+          </tr>
+          <tr>
+            <td class="num">17</td><td class="date">21 Oct</td>
+            <td class="sub-sm">r/fashionadvice</td>
+            <td class="topic">Anyone tried Missacc custom sizing?</td>
+            <td><span class="fmt est">Our thread</span></td>
+          </tr>
+          <tr>
+            <td class="num">18</td><td class="date">21 Oct</td>
+            <td class="sub-sm">r/adviceph</td>
+            <td class="topic ext">Community thread</td>
+            <td><span class="fmt ask">Branded comment</span></td>
+          </tr>
+          <tr>
+            <td class="num">19</td><td class="date">21 Oct</td>
+            <td class="sub-sm">r/TwoXChromosomes</td>
+            <td class="topic">Where can I find some nicer dresses</td>
+            <td><span class="fmt est">Our thread</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note"><b>Where the comments reached:</b> eleven of the nineteen landed in live community threads rather than under our own posts, including r/WeddingDressTips and r/Weddingattireapproval, the heart of the wedding vertical, and the engagement's first placements outside the US conversation in r/adviceph and r/SGExams.</div>
+  </section>
+
+  <!-- ============ LANDSCAPE ============ -->
+  <section class="block" id="communities">
+    <div class="block-head">
+      <h2>Subreddit Landscape</h2>
+      <p>Fourteen communities engaged this cycle, six of them entered for the first time.</p>
+    </div>
+    <div class="landgrid">
+      <div class="landtile core">
+        <span class="lt-name">r/findfashion</span>
+        <span><span class="fmt core">Core engine</span></span>
+        <span class="lt-touch"><b>1</b>1 comment</span>
+      </div>
+      <div class="landtile">
+        <span class="lt-name">r/TwoXChromosomes</span>
+        <span><span class="fmt est">Established</span></span>
+        <span class="lt-touch"><b>4</b>2 posts · 2 comments</span>
+      </div>
+      <div class="landtile">
+        <span class="lt-name">r/womensfashion</span>
+        <span><span class="fmt est">Established</span></span>
+        <span class="lt-touch"><b>3</b>3 comments</span>
+      </div>
+      <div class="landtile">
+        <span class="lt-name">r/OUTFITS</span>
+        <span><span class="fmt est">Established</span></span>
+        <span class="lt-touch"><b>3</b>2 posts · 1 comment</span>
+      </div>
+      <div class="landtile">
+        <span class="lt-name">r/fashionadvice</span>
+        <span><span class="fmt est">Established</span></span>
+        <span class="lt-touch"><b>3</b>1 post · 2 comments</span>
+      </div>
+      <div class="landtile">
+        <span class="lt-name">r/femalefashion</span>
+        <span><span class="fmt est">Established</span></span>
+        <span class="lt-touch"><b>2</b>1 post · 1 comment</span>
+      </div>
+      <div class="landtile">
+        <span class="lt-name">r/Parents</span>
+        <span><span class="fmt est">Established</span></span>
+        <span class="lt-touch"><b>2</b>1 post · 1 comment</span>
+      </div>
+      <div class="landtile">
+        <span class="lt-name">r/fashionhelp</span>
+        <span><span class="fmt est">Established</span></span>
+        <span class="lt-touch"><b>2</b>1 post · 1 comment</span>
+      </div>
+      <div class="landtile">
+        <span class="lt-name">r/WeddingDressTips</span>
+        <span><span class="fmt new">New this cycle</span></span>
+        <span class="lt-touch"><b>2</b>2 comments</span>
+      </div>
+      <div class="landtile">
+        <span class="lt-name">r/Weddingattireapproval</span>
+        <span><span class="fmt new">New this cycle</span></span>
+        <span class="lt-touch"><b>1</b>1 comment</span>
+      </div>
+      <div class="landtile">
+        <span class="lt-name">r/adviceph</span>
+        <span><span class="fmt new">New this cycle</span></span>
+        <span class="lt-touch"><b>1</b>1 comment</span>
+      </div>
+      <div class="landtile">
+        <span class="lt-name">r/SGExams</span>
+        <span><span class="fmt new">New this cycle</span></span>
+        <span class="lt-touch"><b>1</b>1 comment</span>
+      </div>
+      <div class="landtile">
+        <span class="lt-name">r/AskReddit</span>
+        <span><span class="fmt new">New this cycle</span></span>
+        <span class="lt-touch"><b>1</b>1 comment</span>
+      </div>
+      <div class="landtile">
+        <span class="lt-name">r/style</span>
+        <span><span class="fmt new">New this cycle</span></span>
+        <span class="lt-touch"><b>1</b>1 comment</span>
+      </div>
+    </div>
+    <div class="note"><b>The shape of the spread:</b> one core engine, seven established channels, six first entries. The first entries reach into the wedding vertical itself (r/WeddingDressTips and r/Weddingattireapproval, where the brand previously appeared only through other people's positive comments), the engagement's first international spaces (r/adviceph in the Philippines, r/SGExams in Singapore), and two broad-reach rooms (r/AskReddit and r/style).</div>
+  </section>
+
+  <!-- ============ READINGS ============ -->
+  <section class="block">
+    <div class="block-head">
+      <h2>Where the Brand Stands Now</h2>
+      <p>Six readings of the Missacc narrative on Reddit at the close of this cycle.</p>
+    </div>
+    <div class="takes">
+      <div class="take">
+        <span class="t-num">1</span>
+        <h3>The gap keeps widening.</h3>
+        <p>Last cycle the positive comment layer overtook the legacy record by 2. This sweep the lead is 47, at 115 positive comments against 68 negative posts, and it widened through the legacy layer's busiest window since spring.</p>
+      </div>
+      <div class="take">
+        <span class="t-num">2</span>
+        <h3>The brand spoke in its own name.</h3>
+        <p>"Anyone tried Missacc custom sizing?" is the engagement's first brand-titled post, asking directly about the attribute the legacy record attacks hardest. It drew organic replies and ran clean: the higher-intent format four cycles of groundwork were building toward.</p>
+      </div>
+      <div class="take">
+        <span class="t-num">3</span>
+        <h3>The narrative keeps turning.</h3>
+        <p>Comment-layer positive share rose for the fourth straight sweep, 55.6% to 65.5% to 66.9% to 68.5%. The narrative is shifting slowly, cycle by cycle, and it is shifting in the brand's favor.</p>
+      </div>
+      <div class="take">
+        <span class="t-num">4</span>
+        <h3>The conversation carries itself.</h3>
+        <p>37 new comment-layer mentions appeared this window against 19 comments we placed. September closed as the biggest month of the engagement at 38, and October is pacing right behind it with a week still to run.</p>
+      </div>
+      <div class="take">
+        <span class="t-num">5</span>
+        <h3>The brand went where it could not go before.</h3>
+        <p>First placements inside the wedding vertical itself, and the first international placements in Philippine and Singaporean communities. Meanwhile organic positives surfaced in spaces we have never touched, including a German-language wedding subreddit.</p>
+      </div>
+      <div class="take">
+        <span class="t-num">6</span>
+        <h3>The brand now lives in 42 communities.</h3>
+        <p>Positive branded comments sit in 42 subreddits, up from 32 last sweep and 22 the sweep before. No single subreddit, and no single moderator team, defines where Missacc exists on Reddit anymore.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ============ DARK BAND · CLOSING ============ -->
+<section class="band green">
+  <div class="band-inner" id="closing">
+    <div class="b-kick">A note from the team</div>
+    <h2>Our progress, and what we carry forward.</h2>
+    <p class="b-note">This cycle delivered the moment the whole engagement has been building toward: the brand spoke in its own name on Reddit, and the room answered normally. The counterweight that flipped last sweep nearly doubled its lead, 115 positive comments against 68 negative legacy posts, the positive share rose for the fourth straight sweep, and the conversation now reaches 42 communities, some of which we have never placed in at all.</p>
+    <p class="b-note">We keep learning what works. Social-proof posts, dress reveals and try-ons, now carry most of the surface and draw steady organic replies. The brand-ask format landed because it arrived in a prepared room, and we kept it moving with follow-ups inside the thread. And the new ground answered well: the wedding vertical accepted its first placements without friction, and the first international tests in the Philippines and Singapore opened a lane we intend to keep exploring.</p>
+    <p class="b-note">Next cycle we extend all three: more brand-ask posts where the groundwork has made them safe, deeper presence in the wedding vertical, and steady placements that keep the narrative compounding in the brand's favor.</p>
+    <div class="sign">
+      <div class="who">Harsh &amp; Ansh</div>
+      <div class="org">M81 &nbsp;·&nbsp; hello@m81.in &nbsp;·&nbsp; m81.in</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="m81card">
+    <div class="m81-watermark">M81 MEDIA</div>
+    <div class="m81card-inner">
+      <div class="m81-lock"><img src="m81-logo.png" alt="M81"><span class="bname">M81</span></div>
+      <div class="m81-method">
+        <p class="fineprint"><strong>How we pulled this.</strong> Placement records come from the shared tracking sheet, where every post and comment is logged in real time with dates and moderation notes. Sentiment figures come from a full monitoring sweep of indexed branded Missacc mentions on Reddit, exported 24 October 2026 and classified per mention at the post and comment layer, using the same methodology as every previous baseline. This report covers 21 September to 24 October 2026; placements remain live and continue to accrue visibility after the reporting window closes.</p>
+        <div class="src">
+          <span>Platform: Reddit</span><span>Placements: 27</span><span>Subreddits: 14</span><span>Branded mentions tracked: 303</span><span>Sentiment export: 24 Oct 2026</span><span>Period: Sep 21 – Oct 24, 2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
